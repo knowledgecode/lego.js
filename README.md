@@ -9,8 +9,7 @@ Lego.js is an extensible library for JavaScript that is inspired by [CommonJS Mo
 * It works in Chrome, Firefox, Safari, Opera, iOS Safari, Android Browser, and IE 6.0+.
 
 ## Usage
-define function pattern 1
-This pattern has "require" only.
+define function pattern 1 (This pattern has "require" only.)
 
     (function (define) {
 
@@ -20,8 +19,7 @@ This pattern has "require" only.
 
     }(lego.define));
 
-define function pattern 2
-This pattern has no "require".
+define function pattern 2 (This pattern has no "require".)
 
     (function (define) {
 
@@ -31,8 +29,7 @@ This pattern has no "require".
 
     }(lego.define));
 
-define function pattern 3
-This pattern has "require", "exports" and "module".
+define function pattern 3 (This pattern has "require", "exports" and "module".)
 
     (function (define) {
 
@@ -42,8 +39,7 @@ This pattern has "require", "exports" and "module".
 
     }(lego.define));
 
-define function pattern 4
-This pattern has "require", "exports" and "module". In addition, it can extend a parent module.
+define function pattern 4 (This pattern has "require", "exports" and "module". In addition, it can extend a parent module.)
 
     (function (define) {
 
