@@ -1,14 +1,14 @@
-/**
- * QUnit v1.7.0pre - A JavaScript Unit Testing Framework
- *
- * http://docs.jquery.com/QUnit
- *
- * Copyright (c) 2012 John Resig, J旦rn Zaefferer
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * or GPL (GPL-LICENSE.txt) licenses.
- */
+/*
+ QUnit v1.7.0pre - A JavaScript Unit Testing Framework
+
+ http://docs.jquery.com/QUnit
+
+ Copyright (c) 2012 John Resig, Jorn Zaefferer
+ Dual licensed under the MIT (MIT-LICENSE.txt)
+ or GPL (GPL-LICENSE.txt) licenses.
+*/
 (function(j){var q,v;function w(a){l(this,a);this.assertions=[];this.testNumber=++w.count}function E(){d.autorun=!0;d.currentModule&&m("moduleDone",e,{name:d.currentModule,failed:d.moduleStats.bad,passed:d.moduleStats.all-d.moduleStats.bad,total:d.moduleStats.all});var a,c;a=k("qunit-banner");c=k("qunit-tests");var b=+new Date-d.started,f=d.stats.all-d.stats.bad,h=["Tests completed in ",b," milliseconds.<br/><span class='passed'>",f,"</span> tests of <span class='total'>",d.stats.all,"</span> passed, <span class='failed'>",
-d.stats.bad,"</span> failed."].join("");if(a)a.className=d.stats.bad?"qunit-fail":"qunit-pass";if(c)k("qunit-testresult").innerHTML=h;if(d.altertitle&&"undefined"!==typeof document&&document.title)document.title=[d.stats.bad?"笨阀":"笨鐀",document.title.replace(/^[\u2714\u2716] /i,"")].join(" ");if(d.reorder&&q&&0===d.stats.bad)for(a=0;a<sessionStorage.length;a++)c=sessionStorage.key(a++),0===c.indexOf("qunit-test-")&&sessionStorage.removeItem(c);m("done",e,{failed:d.stats.bad,passed:f,total:d.stats.all,
+d.stats.bad,"</span> failed."].join("");if(a)a.className=d.stats.bad?"qunit-fail":"qunit-pass";if(c)k("qunit-testresult").innerHTML=h;if(d.altertitle&&"undefined"!==typeof document&&document.title)document.title=[d.stats.bad?"✖":"✔",document.title.replace(/^[\u2714\u2716] /i,"")].join(" ");if(d.reorder&&q&&0===d.stats.bad)for(a=0;a<sessionStorage.length;a++)c=sessionStorage.key(a++),0===c.indexOf("qunit-test-")&&sessionStorage.removeItem(c);m("done",e,{failed:d.stats.bad,passed:f,total:d.stats.all,
 runtime:b})}function x(a,c){var c=c||3,b;if(a.stacktrace)return a.stacktrace.split("\n")[c+3];if(a.stack)return b=a.stack.split("\n"),/^error$/i.test(b[0])&&b.shift(),b[c];if(a.sourceURL)return/qunit.js$/.test(a.sourceURL)?void 0:a.sourceURL+":"+a.line}function u(a){try{throw Error();}catch(c){return x(c,a)}}function o(a){return!a?"":(a+"").replace(/[\&<>]/g,function(a){switch(a){case "&":return"&amp;";case "<":return"&lt;";case ">":return"&gt;";default:return a}})}function r(a,c){d.queue.push(a);
 d.autorun&&!d.blocking&&y(c)}function y(a){function c(){y(a)}var b=(new Date).getTime();for(d.depth=d.depth?d.depth+1:1;d.queue.length&&!d.blocking;)if(!v||0>=d.updateRate||(new Date).getTime()-b<d.updateRate)d.queue.shift()();else{j.setTimeout(c,13);break}d.depth--;a&&!d.blocking&&!d.queue.length&&0===d.depth&&E()}function z(){d.pollution=[];if(d.noglobals)for(var a in j)A.call(j,a)&&!/^qunit-test-output/.test(a)&&d.pollution.push(a)}function C(a,c){var b,d,e=a.slice();for(b=0;b<e.length;b++)for(d=
 0;d<c.length;d++)if(e[b]===c[d]){e.splice(b,1);b--;break}return e}function l(a,c){for(var b in c)if(void 0===c[b])delete a[b];else if("constructor"!==b||a!==j)a[b]=c[b];return a}function s(a,c,b){a.addEventListener?a.addEventListener(c,b,!1):a.attachEvent?a.attachEvent("on"+c,b):b()}function k(a){return!!("undefined"!==typeof document&&document&&document.getElementById)&&document.getElementById(a)}function p(a){return function(c){d[a].push(c)}}function m(a,c,b){var f;if(e.hasOwnProperty(a))e[a].call(c,
