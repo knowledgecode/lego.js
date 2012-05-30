@@ -1,5 +1,5 @@
 /**
- * @preserve dom.js v0.1.0 (c) 2012 knowledgecode | MIT licensed
+ * @preserve dom.js v0.1.1 (c) 2012 knowledgecode | MIT licensed
  */
 
 /*global lego */
@@ -55,6 +55,25 @@
         i += 1;
       }
       return elements;
+    };
+
+    /**
+    * @name ready
+    * @function
+    * @param {function()} fn
+    */
+    exports.ready = function (fn) {
+      var _fn;
+
+      if (_doc.readyState === 'complete') {
+        global.setTimeout(fn, 1);
+      } else {
+        _fn = function () {
+          fn();
+          exports.unbind(global, 'load', _fn);
+        };
+        this.bind(global, 'load', _fn);
+      }
     };
 
     /**

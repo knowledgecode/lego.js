@@ -7,6 +7,16 @@
     var dom = require('dom');
 
     /**
+     * ready
+     */
+    $.asyncTest('ready', function () {
+      dom.ready(function () {
+        $.ok(true);
+        $.start();
+      });
+    });
+
+    /**
      * $
      */
     $.test('$', function () {
