@@ -1,12 +1,12 @@
 # lego.js
-lego.js is an extensible JavaScript library. It is inspired by [CommonJS Modules](http://wiki.commonjs.org/wiki/Modules), [RequireJS](https://github.com/jrburke/requirejs) and so on.
+lego.js is a lightweight module loader for client-side JavaScript. It is inspired by [CommonJS Modules](http://wiki.commonjs.org.mirrors.page.ca/articles/m/o/d/Modules.html), [RequireJS](https://github.com/jrburke/requirejs) and so on.
 
 ## Features
 * It supports AMD (Asynchronous Module Definition). But it is not fully compatible with RequireJS.
-* It is probably compliant with the CommonJS Modules.
+* It is CommonJS Modules compliant.
 * It is small footprint (about 1KB, minified via Closure Compiler and gzipped).
 * It dosen't pollute the global namespace.
-* It works in Chrome, Firefox, Safari, Opera, iOS Safari, Android Browser, and IE 6.0+.
+* It works in Chrome, Firefox, Opera, Safari, Mobile Safari, Android Browser, and IE 6.0+.
 
 ## Syntax
 define function pattern 1
