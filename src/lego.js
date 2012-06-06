@@ -202,7 +202,7 @@
     while (scripts[i]) {
       uri = scripts[i].src;
       if (/(^|\/)lego\.js$/.test(uri)) {
-        base = ascend(_loc.pathname.replace(/\\/g, '/'));
+        base = ascend(_loc.pathname.replace(/\\/g, '/') + ' ');
         path = ascend(getAbsUri(uri, base).replace(_origin, ''));
         _root = getAbsUri(
           scripts[i].getAttribute('data-url') || path + 'lego_modules/',
