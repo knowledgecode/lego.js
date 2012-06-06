@@ -1,5 +1,5 @@
 /**
- * @preserve lego.js v0.1.0 (c) 2012 knowledgecode | MIT licensed
+ * @preserve lego.js v0.1.1 (c) 2012 knowledgecode | MIT licensed
 */
 
 /*jslint nomen: true, regexp: true, indent: 2 */
@@ -11,18 +11,18 @@
     _cache = {},
     _deps = [],
     _privates,
+    _doc = global.document,
+    _loc = global.location,
+    _origin = _loc.protocol + '//' + _loc.host,
+    _pathname,
+    _root,
     ascend,
     getAbsUri,
     create,
     load,
     require,
     define,
-    normalize,
-    origin,
-    pathname,
-    root,
-    doc = global.document,
-    loc = global.location;
+    normalize;
 
   /**
    * @name ascend
@@ -46,7 +46,7 @@
       return uri;
     }
     if (/^\.{1,2}\//.test(uri)) {
-      opt_path = opt_path || pathname;
+      opt_path = opt_path || _pathname;
       while (uri.indexOf('../') === 0) {
         uri = uri.substring(3);
         opt_path = ascend(opt_path);
@@ -57,9 +57,9 @@
     } else if (uri.indexOf('/') === 0) {
       opt_path = '';
     } else {
-      opt_path = opt_path || root;
+      opt_path = opt_path || _root;
     }
-    return origin + opt_path + uri;
+    return _origin + opt_path + uri;
   };
 
   /**
@@ -193,24 +193,21 @@
   };
 
   /**
-   * @name origin
-   * @property {string} protocol + domain
-   */
-  origin = loc.protocol + '//' + loc.host;
-
-  /**
-   * @name pathname
+   * @name _pathname
    * @property {string} default module path
    */
-  pathname = (function () {
-    var i = 0, scripts = doc.getElementsByTagName('script'), uri, path;
+  _pathname = (function () {
+    var i = 0, scripts = _doc.getElementsByTagName('script'), uri, path, base;
 
     while (scripts[i]) {
       uri = scripts[i].src;
       if (/(^|\/)lego\.js$/.test(uri)) {
-        uri = getAbsUri(uri, ascend(loc.pathname.replace(/\\/g, '/')));
-        path = ascend(uri.replace(origin, ''));
-        root = path + 'lego_modules/';
+        base = ascend(_loc.pathname.replace(/\\/g, '/'));
+        path = ascend(getAbsUri(uri, base).replace(_origin, ''));
+        _root = getAbsUri(
+          scripts[i].getAttribute('data-url') || path + 'lego_modules/',
+          base
+        ).replace(_origin, '');
         break;
       }
       i += 1;
@@ -225,7 +222,7 @@
    * @param {function()=} callback
    */
   lego.add = function (uri, callback) {
-    var script = doc.createElement('script');
+    var script = _doc.createElement('script');
 
     script.src = uri;
     if (script.readyState) {
@@ -242,7 +239,7 @@
         callback = callback && callback();
       };
     }
-    doc.getElementsByTagName('head')[0].appendChild(script);
+    _doc.getElementsByTagName('head')[0].appendChild(script);
   };
 
   /**
@@ -273,24 +270,13 @@
   };
 
   /**
-   * @name cd
-   * @function
-   * @param {string} uri
-   */
-  lego.cd = function (uri) {
-    root = getAbsUri(uri).replace(origin, '');
-  };
-
-  /**
    * @name test
    * @function
    * @param {string} name
    * @param {Array.<Object>=} args
    */
   lego.test = function (name, args) {
-    if (_privates[name]) {
-      return _privates[name].apply(this, args || []);
-    }
+    return _privates[name] && _privates[name].apply(this, args || []);
   };
 
   _privates = {

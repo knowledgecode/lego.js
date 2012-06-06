@@ -173,20 +173,4 @@
     }, 500);
   });
 
-  /**
-   * cd
-   */
-  $.test('cd', function () {
-    var actual, expected;
-
-    lego.cd('../test/');
-
-    actual = lego.test('getAbsUri', ['lego_test.html']);
-    expected = loc.href.replace(/\\/g, '/').replace(/ /g, '%20');
-    $.deepEqual(actual, expected, actual);
-
-    // undo
-    lego.cd('./lego_modules/');
-  });
-
 }(this, QUnit));
